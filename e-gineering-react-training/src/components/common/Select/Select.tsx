@@ -14,9 +14,10 @@ export interface SelectProps {
   placeholder: string;
   value: string;
   selectOptions: SelectOption[];
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 function Select(props: SelectProps) {
-  const { label, id, placeholder, value, selectOptions } = props;
+  const { label, id, placeholder, value, selectOptions, onChange } = props;
   return (
     <div>
       <label>{label}</label>

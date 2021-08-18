@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getFoods, deleteFood } from "../../api/foodsApi";
 import { Food, NewFood } from "../../types/foodType";
 import Table from "../common/Table/Table";
@@ -32,8 +32,9 @@ function ListFoods() {
     setFoods(foods.filter((val) => val.id !== id));
   }
 
-  function onNewFoodChange(att: string, val: string | number) {
-    // setNewFood({att:val, ...newFood})
+  function onNewFoodChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { value, id } = event.target;
+    setNewFood({ ...newFood, [id]: value });
   }
 
   return (
@@ -61,7 +62,7 @@ function ListFoods() {
             onChange={onNewFoodChange}
           />
           <Input
-            id="minimum-quantity"
+            id="minQuantity"
             type="number"
             label="Minimum Quantity"
             value={newFood.minQuantity}
@@ -72,6 +73,7 @@ function ListFoods() {
             label="Type"
             placeholder="Select Type"
             value={newFood.type}
+            onChange={onNewFoodChange}
             selectOptions={[
               { label: "Vegetable", value: "vegetable" },
               { label: "Grain", value: "grain" },

@@ -1,4 +1,4 @@
-import { Food } from "../types/food";
+import { Food } from "../types/foodType";
 
 export async function getFoods(): Promise<Food[]> {
   const res = await fetch("http://localhost:3001/foods");

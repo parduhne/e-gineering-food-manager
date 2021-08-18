@@ -5,3 +5,10 @@ export type Food = {
   minQuantity: number;
   type: string;
 };
+
+export type NewFood = {
+  name: string;
+  quantity: number;
+  minQuantity: number;
+  type: string;
+};

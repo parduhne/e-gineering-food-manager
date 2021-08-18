@@ -8,13 +8,15 @@ export interface InputProps {
   label: string;
   id: string;
   type: string;
+  value: string | number;
+  onChange: Function;
 }
-function Input(props: InputProps) {
+function Input({ label, id, type, value, onChange }: InputProps) {
   return (
     <div>
-      <label>{props.label}</label>
+      <label>{label}</label>
       <br />
-      <input id={props.id} type={props.type} />
+      <input onChange={() => onChange()} id={id} type={type} value={value} />
     </div>
   );
 }

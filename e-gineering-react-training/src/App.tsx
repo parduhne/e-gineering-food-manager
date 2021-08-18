@@ -1,4 +1,4 @@
-import ListFoods from "./components/Foods";
+import ListFoods from "./components/Foods/Foods";
 
 function App() {
   return (

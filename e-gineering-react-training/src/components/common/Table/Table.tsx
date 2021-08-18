@@ -8,16 +8,19 @@ import {
   Paper,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import Button from "../Button/Button";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
-    maxWidth: 1000,
+    maxWidth: 650,
     backgroundColor: "#D3D3D3",
   },
+  tableCell: {
+    padding: 0,
+  },
   button: {
-    backgroundColor: "cyan",
+    width: "100%",
   },
 });
 
@@ -59,12 +62,18 @@ function Table(props: TableProps) {
               return (
                 <TableRow key={id}>
                   {onDelete && (
-                    <Button
-                      className={classes.button}
-                      onClick={async () => onDelete && onDelete(id)}
+                    <TableCell
+                      className={classes.tableCell}
+                      component="th"
+                      scope="row"
                     >
-                      Delete
-                    </Button>
+                      <Button
+                        className={classes.button}
+                        onClick={async () => onDelete && onDelete(id)}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
                   )}
                   {Object.values(row).map((val) => (
                     <TableCell component="th" scope="row">

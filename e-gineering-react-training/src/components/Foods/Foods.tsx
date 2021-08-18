@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import { getFoods, deleteFood } from "../api/foodsApi";
-import { Food } from "../types/food";
-import Table from "./common/Table";
-import { Button } from "@material-ui/core";
-import Input from "./common/Input";
-import Select from "./common/Select";
+import { getFoods, deleteFood } from "../../api/foodsApi";
+import { Food, NewFood } from "../../types/foodType";
+import Table from "../common/Table/Table";
+import Button from "../common/Button/Button";
+import Input from "../common/Input/Input";
+import Select from "../common/Select/Select";
+
+const emptyFood: NewFood = {
+  name: "",
+  quantity: 0,
+  minQuantity: 0,
+  type: "",
+};
 
 function ListFoods() {
   const [foods, setFoods] = useState<Food[]>([]);
+  const [newFood, setNewFood] = useState<NewFood>(emptyFood);
   const [addFoodForm, setAddFoodForm] = useState<boolean>(false);
 
   useEffect(() => {
@@ -24,6 +32,10 @@ function ListFoods() {
     setFoods(foods.filter((val) => val.id !== id));
   }
 
+  function onNewFoodChange(att: string, val: string | number) {
+    // setNewFood({att:val, ...newFood})
+  }
+
   return (
     <>
       <Table
@@ -34,13 +46,32 @@ function ListFoods() {
       <Button onClick={() => setAddFoodForm(true)}>Add New</Button>
       {addFoodForm && (
         <form>
-          <Input id="name" type="text" label="Name" />
-          <Input id="quantity" type="number" label="Quantity" />
-          <Input id="minimum-quantity" type="number" label="Minimum Quantity" />
+          <Input
+            id="name"
+            type="text"
+            label="Name"
+            value={newFood.name}
+            onChange={onNewFoodChange}
+          />
+          <Input
+            id="quantity"
+            type="number"
+            label="Quantity"
+            value={newFood.quantity}
+            onChange={onNewFoodChange}
+          />
+          <Input
+            id="minimum-quantity"
+            type="number"
+            label="Minimum Quantity"
+            value={newFood.minQuantity}
+            onChange={onNewFoodChange}
+          />
           <Select
             id="type"
             label="Type"
             placeholder="Select Type"
+            value={newFood.type}
             selectOptions={[
               { label: "Vegetable", value: "vegetable" },
               { label: "Grain", value: "grain" },

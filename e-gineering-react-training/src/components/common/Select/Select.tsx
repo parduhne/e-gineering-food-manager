@@ -12,16 +12,23 @@ export interface SelectProps {
   label: string;
   id: string;
   placeholder: string;
+  value: string;
   selectOptions: SelectOption[];
 }
 function Select(props: SelectProps) {
+  const { label, id, placeholder, value, selectOptions } = props;
   return (
     <div>
-      <label>{props.label}</label>
+      <label>{label}</label>
       <br />
-      <select id={props.id} placeholder={props.placeholder}>
-        {props.selectOptions.map((opt) => (
-          <option key={opt.value} value={opt.value}>
+      <select id={id} placeholder={placeholder}>
+        <option value=""></option>
+        {selectOptions.map((opt) => (
+          <option
+            selected={value === opt.value}
+            key={opt.value}
+            value={opt.value}
+          >
             {opt.label}
           </option>
         ))}

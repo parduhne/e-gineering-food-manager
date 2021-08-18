@@ -6,7 +6,7 @@ export async function getFoods(): Promise<Food[]> {
   return await res.json();
 }
 
-export async function deleteFood(id: number): Promise<void> {
+export async function deleteFood(id: string): Promise<void> {
   const res = await fetch("http://localhost:3001/foods/" + id, {
     method: "DELETE",
   });

@@ -1,24 +1,10 @@
 {
   "foods": [
     {
-      "id": 1,
-      "name": "Carrot",
-      "quantity": 5,
-      "reorderPoint": 1,
-      "type": "veggie"
-    },
-    {
-      "id": 2,
-      "name": "Pumpkin",
-      "quantity": 6,
-      "reorderPoint": 0,
-      "type": "veggie"
-    },
-    {
       "id": 3,
       "name": "Cucumber",
       "quantity": 10,
-      "reorderPoint": 2,
+      "minQuantity": 2,
       "type": "veggie"
     }
   ]

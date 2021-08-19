@@ -15,11 +15,11 @@
       "type": "Veggie"
     },
     {
-      "name": "",
-      "quantity": 0,
-      "minQuantity": 0,
-      "type": "",
-      "id": 3
+      "name": "New food",
+      "quantity": "3",
+      "minQuantity": "2",
+      "type": "Vegetable",
+      "id": 5
     }
   ]
 }

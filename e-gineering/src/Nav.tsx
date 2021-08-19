@@ -10,6 +10,9 @@ export function Nav() {
         <li>
           <Link to="/about">About</Link>
         </li>
+        <li>
+          <Link to="/food">Add Food</Link>
+        </li>
       </ul>
     </nav>
   );

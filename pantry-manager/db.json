@@ -6,6 +6,13 @@
       "minQuantity": 0,
       "type": "",
       "id": 1
+    },
+    {
+      "name": "somethin",
+      "quantity": "2",
+      "minQuantity": "2",
+      "type": "Vegetable",
+      "id": 2
     }
   ]
 }

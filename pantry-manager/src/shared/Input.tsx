@@ -1,3 +1,5 @@
+import { TextField, InputLabel } from "@material-ui/core";
+
 type InputProps = {
   label: string;
   id: string;
@@ -15,9 +17,11 @@ export function Input({
 }: InputProps) {
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      <InputLabel>{label}</InputLabel>
+      <TextField id={id} onChange={onChange} type={type} value={value} />
+      {/* <label htmlFor={id}>{label}</label>
       <br />
-      <input onChange={onChange} id={id} type={type} value={value} />
+      <input onChange={onChange} id={id} type={type} value={value} /> */}
     </div>
   );
 }

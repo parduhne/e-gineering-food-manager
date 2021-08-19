@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { addFood } from "./api/foodsApi";
+import { saveFood, getFood } from "./api/foodsApi";
 import { Input } from "./shared/Input";
 import { Select } from "./shared/Select";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { Food } from "./ListFoods/ListFoods";
+import Button from "./shared/Button";
 
 export type NewFood = {
   name: string;
@@ -19,15 +21,36 @@ const emptyFood: NewFood = {
   type: "",
 };
 
-export function FoodForm() {
-  const [newFood, setNewFood] = useState<NewFood>(emptyFood);
+export interface FoodFormProps {
+  food?: Food;
+}
+
+export function FoodForm({ food }: FoodFormProps) {
+  const [newFood, setNewFood] = useState<NewFood>(food ? food : emptyFood);
   const history = useHistory();
+  const { foodId }: { foodId: string | undefined } = useParams();
+
+  useEffect(() => {
+    async function callGetFood() {
+      // Using underscore to avoid naming conflict
+      if (foodId) {
+        const _food = await getFood(foodId);
+        setNewFood(_food);
+      }
+    }
+    callGetFood();
+    // Using empty array for useEffect since we only want this to run once.
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
-      await addFood(newFood);
+      if (foodId) {
+        await saveFood({ ...newFood, id: parseInt(foodId) });
+      } else {
+        await saveFood(newFood);
+      }
       toast.success("Food saved! 🦄");
       history.push("/"); // Redirect to home.
     } catch (error) {
@@ -50,6 +73,7 @@ export function FoodForm() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>{foodId ? "Edit Food" : "Add Food"}</h1>
       <Input onChange={onChange} id="name" label="Name" value={newFood.name} />
       <Input
         onChange={onChange}
@@ -77,7 +101,7 @@ export function FoodForm() {
           { label: "Fruit", value: "Fruit" },
         ]}
       />
-      <input className="btn btn-primary" type="submit" value="Save Food" />
+      <Button type="submit">Save Food</Button>
     </form>
   );
 }

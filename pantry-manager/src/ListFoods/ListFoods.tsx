@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { getFoods, deleteFood } from "../api/foodsApi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FoodForm } from "../FoodForm";
 import { Link } from "react-router-dom";
 import Button from "../shared/Button";
+import { useQuery } from "react-query";
 
 export type Food = {
   id: number;
@@ -15,21 +15,11 @@ export type Food = {
 };
 
 export function ListFoods() {
-  const [foods, setFoods] = useState<Food[]>([]);
-  // Long form of the above that avoids using array destructuring.
-  // const foodStateArray = useState<Food[]>([]);
-  // const foods = foodStateArray[0];
-  // const setFoods = foodStateArray[1];
+  const { data: foods, isLoading } = useQuery("foods", getFoods);
 
-  useEffect(() => {
-    async function callGetFoods() {
-      // Using underscore to avoid naming conflict
-      const _foods = await getFoods();
-      setFoods(_foods);
-    }
-    callGetFoods();
-    // Using empty array for useEffect since we only want this to run once.
-  }, []);
+  if (!foods || isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <span>
@@ -38,12 +28,6 @@ export function ListFoods() {
 
       <Link to="/food">Add Food</Link>
 
-      {/* Exercise 1: Create a reusable Select and consume it below for Food Type 
-
-        1. Vegetable
-        2. Grain
-        3. Fruit
-      */}
       {foods.length ? (
         <table>
           <thead>
@@ -63,8 +47,8 @@ export function ListFoods() {
                     onClick={async () => {
                       await deleteFood(food.id);
                       // Return a new array with the id that was just deleted omitted.
-                      const newFoods = foods.filter((f) => f.id !== food.id);
-                      setFoods(newFoods);
+                      // const newFoods = foods.filter((f) => f.id !== food.id);
+                      // setFoods(newFoods);
                     }}
                   >
                     Delete

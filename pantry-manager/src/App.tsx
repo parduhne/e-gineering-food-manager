@@ -5,6 +5,7 @@ import { Nav } from "./Nav";
 import { FoodForm } from "./FoodForm";
 import { QueryClientProvider, QueryClient } from "react-query";
 import UserContextProvider, { UserContextType } from "./UserContext";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const user: UserContextType = {
   name: "Evan",
@@ -17,6 +18,7 @@ export default function App() {
   const queryClient = new QueryClient();
   return (
     <UserContextProvider value={user}>
+      <ReactQueryDevtools />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Nav />

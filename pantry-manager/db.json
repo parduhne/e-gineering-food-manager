@@ -1,16 +1,22 @@
 {
   "foods": [
     {
-      "name": "",
-      "quantity": 0,
-      "minQuantity": 0,
-      "type": "",
+      "name": "rice",
+      "quantity": "6",
+      "minQuantity": "5",
+      "type": "Grain",
       "id": 1
     },
     {
+<<<<<<< HEAD
       "name": "somethin",
       "quantity": "2",
       "minQuantity": "2",
+=======
+      "name": "Onionsy",
+      "quantity": "6",
+      "minQuantity": "5",
+>>>>>>> added query
       "type": "Vegetable",
       "id": 2
     }
